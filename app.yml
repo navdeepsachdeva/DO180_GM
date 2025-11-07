@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: normal-app
+  name: normal-app
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: normal-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: normal-app
+    spec:
+      containers:
+      - image: quay.io/navdeep_sachdeva/custom_httpd:1.0
+        name: custom-c

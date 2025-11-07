@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: onetime
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - tail -n2 /etc/passwd
+        image: registry.access.redhat.com/ubi9/ubi
+        name: onetime
+        resources: {}
+      restartPolicy: Never
+status: {}

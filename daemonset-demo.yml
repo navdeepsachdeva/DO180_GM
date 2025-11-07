@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-demo
+  labels:
+    demo: something
+spec:
+  selector:
+    matchLabels:
+      name: ds-container
+  template:
+    metadata:
+      labels:
+        name: ds-container
+    spec:
+      containers:
+      - name: web
+        image: quay.io/navdeep_sachdeva/custom_httpd:1.0

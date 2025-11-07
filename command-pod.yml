@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: command-pod
+    you: youself
+  name: command-pod
+spec:
+  containers:
+  - image: quay.io/navdeep_sachdeva/custom_httpd:1.0
+    name: command-pod
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 8080
+    - containerPort: 8443
+  # - image: quay.io/navdeep_sachdeva/custom_httpd:1.0
+  #   name: command-pod
+  #   ports:
+  #   - containerPort: 8080

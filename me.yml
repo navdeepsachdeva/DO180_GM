@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    myapp: dbdeploy
+  name: dbdeploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dbdeploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dbdeploy
+    spec:
+      containers:
+      - image: quay.io/sclorg/mysql-80-c9s
+        name: mysql-80-c9s
+        env:
+          - name: MYSQL_USER
+            value: kelly
+          - name: MYSQL_DATABASE
+            value: gm
+          - name: MYSQL_PASSWORD
+            value: mypa55
+          - name: MYSQL_ROOT_PASSWORD
+            value: r00tpa55
+        resources: {}
+status: {}

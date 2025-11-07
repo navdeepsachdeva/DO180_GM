@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gm-deployment
+  namespace: project1
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      me: myself
+
+  template:
+    metadata:
+      name: matt-pod
+      labels:
+        me: myself
+    spec:
+      containers:
+        - image: quay.io/navdeep_sachdeva/custom_httpd:1.0
+          name: web
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+

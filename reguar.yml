@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: regular
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: regular
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - /bin/bash
+            - -c
+            - tail -n2 /etc/passwd
+            image: registry.access.redhat.com/ubi9/ubi
+            name: regular
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: '*/1 * * * *'
+status: {}
