@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dbserver
+spec:
+  selector:
+    matchLabels:
+      app: database
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: dbserver
+          image: docker.io/library/mysql
+          ports:
+            - name: database
+              containerPort: 3306
+          env:
+            - name: MYSQL_USER
+              value: kelly
+            - name: MYSQL_PASSWORD
+              value: mypa55
+            - name: MYSQL_DATABASE
+              value: gm
+            - name: MYSQL_ROOT_PASSWORD
+              value: r00tpa55
+          volumeMounts:
+            - name: owndata
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: owndata
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "lvms-vg1"
+        resources:
+          requests:
+            storage: 1Gi

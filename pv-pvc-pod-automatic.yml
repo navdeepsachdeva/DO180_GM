@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: automatic-pvc
+spec:
+  storageClassName: "nfs-storage"
+  accessModes:
+  - ReadWriteOnce
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: auto-pod
+spec:
+  containers:
+  - name: web
+    image: quay.io/navdeep_sachdeva/custom_httpd:1.0
+    ports:
+    - containerPort: 8080
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: robert-storage
+  volumes:
+  - name: robert-storage
+    persistentVolumeClaim:
+      claimName: automatic-pvc
